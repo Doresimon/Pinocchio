@@ -64,9 +64,9 @@ double cpuFreq = 0;
 uint64_t GetRDTSC() {
 	uint64_t rv;
 	__asm__ (
-		"push		%%ebx;"
+		"push		%%rbx;"
 		"cpuid;"
-		"pop		%%ebx;"
+		"pop		%%rbx;"
 		:::"%eax","%ecx","%edx");
 	__asm__ __volatile__ ("rdtsc" : "=A" (rv));
 	return (rv);
