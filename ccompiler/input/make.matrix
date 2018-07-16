@@ -1,27 +1,27 @@
 PYTHON=python
 
-matrix-all: build build/eqtest-p0-b32 build/eqtest-p0-b32.arith
+matrix-all: build build/sha256-p1-b32 build/sha256-p1-b32.arith
 
-# App eqtest
-#   Param 0
+# App sha256
+#   Param 1
 #     Bitwidth 32
-build/eqtest-p0-b32-native.o: eqtest.c
-	gcc -g -I../../common -Ibuild/ -c -o build/eqtest-p0-b32-native.o eqtest.c -DQSP_TEST -DPARAM=0 -DBIT_WIDTH=32
+build/sha256-p1-b32-native.o: sha256.c
+	gcc -g -I../../common -Ibuild/ -c -o build/sha256-p1-b32-native.o sha256.c -DQSP_TEST -DPARAM=1 -DBIT_WIDTH=32
 
-build/eqtest-p0-b32-test.o: eqtest-test.c
-	gcc -g -I../../common -Ibuild/ -c -o build/eqtest-p0-b32-test.o eqtest-test.c -DQSP_TEST -DPARAM=0 -DBIT_WIDTH=32
+build/sha256-p1-b32-test.o: sha256-test.c
+	gcc -g -I../../common -Ibuild/ -c -o build/sha256-p1-b32-test.o sha256-test.c -DQSP_TEST -DPARAM=1 -DBIT_WIDTH=32
 
-build/qsp-test-eqtest-p0.o: qsp-test.c
-	gcc -g -I../../common -Ibuild/ -c -o build/qsp-test-eqtest-p0.o qsp-test.c -DPARAM=0
+build/qsp-test-sha256-p1.o: qsp-test.c
+	gcc -g -I../../common -Ibuild/ -c -o build/qsp-test-sha256-p1.o qsp-test.c -DPARAM=1
 
-build/eqtest-p0-b32: build/eqtest-p0-b32-native.o \
-	build/eqtest-p0-b32-test.o \
-	build/qsp-test-eqtest-p0.o \
+build/sha256-p1-b32: build/sha256-p1-b32-native.o \
+	build/sha256-p1-b32-test.o \
+	build/qsp-test-sha256-p1.o \
 	build/wire-io.o \
 	build/print-matrix.o
-	gcc -g -I../../common -Ibuild/ -o build/eqtest-p0-b32 build/eqtest-p0-b32-native.o build/eqtest-p0-b32-test.o build/qsp-test-eqtest-p0.o build/wire-io.o build/print-matrix.o
+	gcc -g -I../../common -Ibuild/ -o build/sha256-p1-b32 build/sha256-p1-b32-native.o build/sha256-p1-b32-test.o build/qsp-test-sha256-p1.o build/wire-io.o build/print-matrix.o
 
-build/eqtest-p0-b32.arith: eqtest.c
-	$(PYTHON) ../src/vercomp.py eqtest.c --arith build/eqtest-p0-b32.arith --bit-width 32 --cpparg _Ibuild/ _DPARAM=0 _DBIT_WIDTH=32
+build/sha256-p1-b32.arith: sha256.c
+	$(PYTHON) ../src/vercomp.py sha256.c --arith build/sha256-p1-b32.arith --bit-width 32 --cpparg _Ibuild/ _DPARAM=1 _DBIT_WIDTH=32
 
 include make.in

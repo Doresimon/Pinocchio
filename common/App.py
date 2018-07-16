@@ -18,12 +18,13 @@ class App:
     apps = [#App("factorial"),
       #App("two-matrix", ignore_overflow=True),
       #App("one-matrix", ignore_overflow=True),
-      App("eqtest")
+      # App("eqtest")
       #App("polynomial", ignore_overflow=True),
       #App("image-kernel"),
       #App("floyd"),
       #App("lgca", bitwidths=[32]),
-      #App("sha", params=[0], bitwidths=[32], cached_construction=True),
+      # App("sha", params=[0], bitwidths=[32], cached_construction=True)
+      App("sha256", params=[1], bitwidths=[32], cached_construction=True)
       #App("sha", params=[1], bitwidths=[32], cached_construction=True),
       ]
     return apps
